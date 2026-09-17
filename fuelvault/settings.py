@@ -90,7 +90,7 @@ WSGI_APPLICATION = 'fuelvault.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default= config('RENDER_EXTERNAL_DB'),
+        default= config('RENDER_INTERNAL_DB'),
         conn_max_age=600
     )
 }
