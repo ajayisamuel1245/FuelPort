@@ -90,7 +90,7 @@ WSGI_APPLICATION = 'fuelvault.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default= config('RENDER_INTERNAL_DB'),
+        default= config('RENDER_EXTERNAL_DB'),
         conn_max_age=600
     )
 }
@@ -147,8 +147,37 @@ MAILERS = {
     },
 }
 
-# CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS').split(',')
+
+# ---------------------------------
+# CORS
+# ---------------------------------
+
+CORS_ALLOWED_ORIGINS = config(
+    'CORS_ALLOWED_ORIGINS'
+).split(',')
 
 CORS_ALLOW_CREDENTIALS = True
-CSRF_TRUSTED_ORIGINS = config('CORS_ALLOWED_ORIGINS').split(',')
+
+
+# ---------------------------------
+# CSRF
+# ---------------------------------
+
+CSRF_TRUSTED_ORIGINS = config(
+    'CORS_ALLOWED_ORIGINS'
+).split(',')
+
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = "None"
+
+
+# ---------------------------------
+# SESSION
+# ---------------------------------
+
+SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_SAMESITE = "None"
+
+# Keep this True.
+# JavaScript should NOT read sessionid.
+SESSION_COOKIE_HTTPONLY = True
